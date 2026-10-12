@@ -2,6 +2,8 @@
 
 Plan for about 15 minutes, most of it downloads.
 
+**Reminder: nothing to watch, play or listen to comes with this.** The TV plays movie files from a folder *you* choose, the console plays game files *you* provide, and the turntable shows what *your* iTunes or Spotify app is playing. The installer sets up the room and the tools that run it, and nothing else.
+
 ## Before you start
 
 1. **Wallpaper Engine** from Steam ([store page](https://store.steampowered.com/app/431960/Wallpaper_Engine/)). Start it once so it creates its folders.

@@ -12,6 +12,17 @@ $x = '(#SCREENAREAWIDTH#/2-700*#SCREENAREAHEIGHT#/1080-226)'; $y = '(#SCREENAREA
 if (Get-Process Rainmeter -ErrorAction SilentlyContinue) {
     & $rm '!WriteKeyValue' 'KaijuHUD\TVRemote' 'WindowX' $x $ini
     & $rm '!WriteKeyValue' 'KaijuHUD\TVRemote' 'WindowY' $y $ini
+    & $rm '!WriteKeyValue' 'KaijuHUD\TVRemote' 'AlwaysOnTop' '-2' $ini         # desktop level: the TV player sits UNDER the frame and shows through its window
+    & $rm '!WriteKeyValue' 'KaijuHUD\TVRemote' 'Draggable' '0' $ini
+    # the click layer over the whole wallpaper, and the wall-mounted gauge panel at the top right (372 wide, 24 px from the edge)
+    & $rm '!WriteKeyValue' 'KaijuHUD\Scene' 'WindowX' '0' $ini
+    & $rm '!WriteKeyValue' 'KaijuHUD\Scene' 'WindowY' '0' $ini
+    & $rm '!WriteKeyValue' 'KaijuHUD\Scene' 'AlwaysOnTop' '-2' $ini
+    & $rm '!WriteKeyValue' 'KaijuHUD\Scene' 'Draggable' '0' $ini
+    & $rm '!WriteKeyValue' 'KaijuHUD\Systems' 'WindowX' '(#SCREENAREAWIDTH#-392)' $ini
+    & $rm '!WriteKeyValue' 'KaijuHUD\Systems' 'WindowY' '24' $ini
+    & $rm '!WriteKeyValue' 'KaijuHUD\Systems' 'AlwaysOnTop' '-2' $ini
+    & $rm '!WriteKeyValue' 'KaijuHUD\Systems' 'Draggable' '0' $ini
     & $rm '!Refresh' 'KaijuHUD\TVRemote'
     # KAIJU SYSTEMS console (150x80 skin, body on its bottom edge): on top of the TV, right of the antennas
     $cx = '(#SCREENAREAWIDTH#/2-700*#SCREENAREAHEIGHT#/1080+150-75)'; $cy = '(#SCREENAREAHEIGHT#*0.875-42*#SCREENAREAHEIGHT#/1080-357+56-78)'
