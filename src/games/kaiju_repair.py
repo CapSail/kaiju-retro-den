@@ -1,8 +1,9 @@
 """Repairs the KAIJU TV / game settings that can get lost (called by FIX DESKTOP; safe to run any time, idempotent).
 It only touches the exact keys listed here, so anything else you changed in an emulator is left alone. Every change is logged to state/games.log.
   - mpv TV player: mpv.conf keys, input.conf present
-  - Snes9x: pause-when-inactive off, background input on, Xbox controller on player 1
-  - Dolphin: portable.txt, background input, no confirm-on-stop, Xbox controller on GameCube pad 1 and Wii Remote 1
+  - Snes9x: pause-when-inactive off, background input on, 4:3 picture
+  - Dolphin: portable.txt, background input, no confirm-on-stop, 4:3 picture
+  - Controller buttons are NOT touched: every user sets up their own controller in the emulator
   - required files exist (reported, not recreated)
 """
 import os, re, sys, time
@@ -59,9 +60,6 @@ if os.path.isfile(MPV_CONF):
 
 # ---------------------------------------------------------------- Snes9x
 S9 = os.path.join(K.snes9x_dir, "snes9x.conf")      # Snes9x writes this file the first time it runs
-PAD = {"A": "(J0)Button 1", "B": "(J0)Button 0", "X": "(J0)Button 3", "Y": "(J0)Button 2", "L": "(J0)Button 4", "R": "(J0)Button 5",
-       "Start": "(J0)Button 7", "Select": "(J0)Button 6", "Up": "(J0)POV Up", "Down": "(J0)POV Down", "Left": "(J0)POV Left", "Right": "(J0)POV Right"}
-
 
 def conf_set(s, key_regex, value, label):
     """Set 'key = value' keeping the original spacing and any trailing comment; returns (text, changed)."""
@@ -76,16 +74,11 @@ def conf_set(s, key_regex, value, label):
 if os.path.isfile(S9):
     s = read(S9); o = s
     s, _ = conf_set(s, r"PauseWhenInactive", "FALSE", "snes9x PauseWhenInactive")
-    s, _ = conf_set(s, r"Input:Background", "ON", "snes9x Input:Background")                       # the Xbox controller keeps working while the game is not focused
+    s, _ = conf_set(s, r"Input:Background", "ON", "snes9x Input:Background")                       # a controller keeps working while the game is not focused (it sits in the TV and never takes focus)
     s, _ = conf_set(s, r"Input:BackgroundKeyHotkeys", "OFF", "snes9x Input:BackgroundKeyHotkeys")  # ...but typing in other apps must NOT trigger Snes9x hotkeys (a comma toggled its input display)
-    s, _ = conf_set(s, r"Joypad2:Enabled", "FALSE", "snes9x Joypad2:Enabled")                       # player 2 was on keyboard letters, which background input would read while typing
-    for k, v in PAD.items():
-        s, _ = conf_set(s, r"Joypad1:" + re.escape(k), v, f"snes9x Joypad1:{k}")
+    s, _ = conf_set(s, r"Joypad2:Enabled", "FALSE", "snes9x Joypad2:Enabled")                       # player 2 defaults to keyboard letters, which background input would read while typing in other apps
     # the TV picture is 4:3: draw SNES games 4:3 too (base width 299 = 4:3) so they fill it instead of leaving black bars at the sides
     s, _ = conf_set(s, r"Stretch:AspectRatioBaseWidth", "299", "snes9x Stretch:AspectRatioBaseWidth")
-    # quick save / quick load (slot 0) on the stick clicks: right stick click = save, left stick click = load (Snes9x cannot do button combos)
-    for k, v in (("Key:SaveSlot0", "(J0)Button 9"), ("Mods:SaveSlot0", "none"), ("Key:LoadSlot0", "(J0)Button 8"), ("Mods:LoadSlot0", "none")):
-        s, _ = conf_set(s, re.escape(k), v, f"snes9x hotkey {k}")
     if s != o:
         write(S9, s)
 
@@ -130,32 +123,6 @@ if os.path.isdir(DOL):
     # 4:3 menus and widescreen gameplay; and never resize the window to the game
     ini_set(os.path.join(cfg, "GFX.ini"), "Settings", [("AspectRatio", "3")])
     ini_set(os.path.join(cfg, "Dolphin.ini"), "Display", [("RenderWindowAutoSize", "False"), ("KeepWindowOnTop", "False")])
-    # quick save / quick load (state slot 1): Back + right bumper = save, Back + left bumper = load
-    ini_set(os.path.join(cfg, "Hotkeys.ini"), "Hotkeys", [("Device", "XInput/0/Gamepad"), ("Save State/Save State Slot 1", "Back & `Shoulder R`"),
-                                                         ("Load State/Load State Slot 1", "Back & `Shoulder L`")])
-
-    CAL = "100.00 141.42 100.00 141.42 100.00 141.42 100.00 141.42"
-    GC = [("Device", "XInput/0/Gamepad"), ("Buttons/A", "`Button A`"), ("Buttons/B", "`Button X`"), ("Buttons/X", "`Button B`"), ("Buttons/Y", "`Button Y`"),
-          ("Buttons/Z", "`Shoulder R`"), ("Buttons/Start", "Start"), ("Main Stick/Up", "`Left Y+`"), ("Main Stick/Down", "`Left Y-`"),
-          ("Main Stick/Left", "`Left X-`"), ("Main Stick/Right", "`Left X+`"), ("Main Stick/Modifier", "`Thumb L`"), ("Main Stick/Calibration", CAL),
-          ("C-Stick/Up", "`Right Y+`"), ("C-Stick/Down", "`Right Y-`"), ("C-Stick/Left", "`Right X-`"), ("C-Stick/Right", "`Right X+`"),
-          ("C-Stick/Modifier", "`Thumb R`"), ("C-Stick/Calibration", CAL), ("Triggers/L", "`Trigger L`"), ("Triggers/R", "`Trigger R`"),
-          ("Triggers/L-Analog", "`Trigger L`"), ("Triggers/R-Analog", "`Trigger R`"), ("D-Pad/Up", "`Pad N`"), ("D-Pad/Down", "`Pad S`"),
-          ("D-Pad/Left", "`Pad W`"), ("D-Pad/Right", "`Pad E`"), ("Rumble/Motor", "`Motor L`|`Motor R`")]
-    WM = [("Device", "XInput/0/Gamepad"), ("Buttons/A", "`Button A`"), ("Buttons/B", "`Button B`"), ("Buttons/1", "`Button X`"), ("Buttons/2", "`Button Y`"),
-          ("Buttons/-", "Back"), ("Buttons/+", "Start"), ("Buttons/Home", "Guide"), ("IR/Up", "`Right Y+`"), ("IR/Down", "`Right Y-`"),
-          ("IR/Left", "`Right X-`"), ("IR/Right", "`Right X+`"), ("Shake/X", "`Shoulder R`"), ("Shake/Y", "`Shoulder R`"), ("Shake/Z", "`Shoulder R`"),
-          ("Nunchuk/Buttons/C", "`Shoulder L`"), ("Nunchuk/Buttons/Z", "`Trigger L`"), ("Nunchuk/Stick/Up", "`Left Y+`"), ("Nunchuk/Stick/Down", "`Left Y-`"),
-          ("Nunchuk/Stick/Left", "`Left X-`"), ("Nunchuk/Stick/Right", "`Left X+`"), ("Nunchuk/Shake/X", "`Thumb L`"), ("Nunchuk/Shake/Y", "`Thumb L`"),
-          ("Nunchuk/Shake/Z", "`Thumb L`"), ("D-Pad/Up", "`Pad N`"), ("D-Pad/Down", "`Pad S`"), ("D-Pad/Left", "`Pad W`"), ("D-Pad/Right", "`Pad E`"),
-          ("Rumble/Motor", "`Motor L`|`Motor R`")]
-    for fname, sec, table in (("GCPadNew.ini", "GCPad1", GC), ("WiimoteNew.ini", "Wiimote1", WM)):
-        path = os.path.join(cfg, fname)
-        cur = read(path) if os.path.isfile(path) else ""
-        if re.search(r"(?ms)^\[" + sec + r"\]\s*\r?\nDevice = XInput/0/Gamepad", cur):
-            continue                      # already on the Xbox controller: leave it (it may hold your own tweaks)
-        ini_set(path, sec, table)
-
 # ---------------------------------------------------------------- required files (reported only)
 _j = os.path.join
 REQ = [_j(K.games, "kaiju_games.py"), _j(K.games, "tv_game.ps1"), _j(K.games, "console_click.ps1"), _j(K.games, "tv_volume.ps1"),

@@ -40,7 +40,7 @@ It then lists the downloads (name, size, source) and waits for your OK. Each fil
 
 * The room switches on. Click the **TV picture** to start a movie, the **console** for games, the **file cabinet** for your old Desktop icons.
 * Start menu, **Kaiju Retro Den**: POWER ON, POWER OFF, FIX DESKTOP. Also a **Kaiju POWER ON** shortcut on the Desktop.
-* **Games:** put your game files in the folders you chose, click the console, pick one, double-click.
+* **Games:** put your game files in the folders you chose, click the console, pick one, double-click. Set up your own controller or keys once in each emulator (SET UP EMULATOR button in the game list; see TROUBLESHOOTING.md, Controls for games).
 * If something looks off, run **FIX DESKTOP**; it repairs almost everything (see [TROUBLESHOOTING.md](TROUBLESHOOTING.md)).
 
 ## Updating or repairing

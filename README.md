@@ -17,7 +17,7 @@ It runs on **one screen** (your primary monitor). Other monitors are left alone.
 
 *The wallpaper by itself. Rainmeter adds the TV, console, gauges and the cabinet drawer on top.*
 
-> **Status: v0.1, early.** Built and tested on one Windows 11 PC at 1920x1080. The installer has been tested in a sandbox but **not yet on a clean machine**, and the controller button mappings have never been pressed. See [Known limits](TROUBLESHOOTING.md#known-limits). Bug reports are welcome.
+> **Status: v0.1, early.** Built and tested on one Windows 11 PC at 1920x1080. The installer has been tested in a sandbox but **not yet on a clean machine**. See [Known limits](TROUBLESHOOTING.md#known-limits). Bug reports are welcome.
 
 ## What you need
 
@@ -25,6 +25,7 @@ It runs on **one screen** (your primary monitor). Other monitors are left alone.
 * **[Wallpaper Engine](https://store.steampowered.com/app/431960/Wallpaper_Engine/)** on Steam (paid, about 4 USD). This is the only thing you have to buy.
 * Python 3 with tkinter (the installer can add it for you with winget)
 * Your own movies, and your own game files (ROMs) if you want the console
+* A controller or keyboard of your choice for games: you set up the buttons yourself in each emulator (see [Controls for games](TROUBLESHOOTING.md#controls-for-games))
 
 The installer downloads the rest (mpv, Rainmeter, ShaderGlass, Snes9x, Dolphin) from their official sources and checks each file against a fixed checksum. **No games, no ROMs, no BIOS files and no movies are included or downloaded.**
 

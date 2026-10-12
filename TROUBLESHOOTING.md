@@ -30,9 +30,14 @@ All in `<install folder>\state\`: `fix_desktop.log`, `power.log`, `autopause.log
 
 **The room is the wrong size after changing the screen resolution.** The watcher re-applies it after a few seconds; run FIX DESKTOP if it does not.
 
-## Controller
+## Controls for games
 
-An Xbox controller is set up for Snes9x and Dolphin: the standard buttons plus **quick save / load** (Dolphin: Back + right bumper saves, Back + left bumper loads; Snes9x: right stick click saves, left stick click loads). **These mappings have not been tested with a real controller yet.**
+This project does **not** set any controller or key bindings, because everyone's controller and layout is different. Set yours up once in each emulator and it is remembered:
+
+* **SNES (Snes9x):** on the game list press **SET UP EMULATOR**, then *Config > Input / Joypad* (and *Config > Hotkeys* for save states).
+* **GameCube / Wii (Dolphin):** on the game list press **SET UP EMULATOR**, then *Controllers*, and *Options > Hotkey Settings* for save states.
+
+The room only makes sure the emulators keep reading your controller while the game sits in the TV (it never takes the keyboard focus) and that the picture fits the TV screen. It leaves your button layout and hotkeys alone.
 
 ## Known limits
 
