@@ -42,7 +42,9 @@ The room only makes sure the emulators keep reading your controller while the ga
 ## Known limits
 
 * Tested on Windows 11 at 1920x1080 on a single screen. Other sizes should scale (everything is drawn relative to the screen height) but are untested.
-* The installer is **not yet tested on a clean machine**. The download, silent Rainmeter install, scheduled task and shortcut steps have only been exercised in a sandbox.
+* The installer is **not yet tested on a clean machine**. Copying files, writing the config, building the playlist, drawing the widgets, the cabinet and the Desktop move/undo were tested in a sandbox. The downloads, the silent Rainmeter install, the scheduled task and the shortcuts have **never been run for real yet**.
+* Spotify support relies on Rainmeter's built-in Spotify reader and has not been confirmed yet. iTunes uses the same mechanism and is the safer choice for now.
+* Snes9x only creates its settings file the first time it runs, so the room's fixes for it (keeps running in the TV, 4:3 picture) apply from the second game onward. Run FIX DESKTOP after your first game if the picture looks stretched wrong.
 * The mpv scripts that find their folder (`tvstate.lua`, `tvhover.lua`) have not yet been run inside mpv after the move to the new folder layout.
 * PlayStation 2 is not supported in this version.
 * The Dolphin picture scaling fix (stretching GameCube games to the 4:3 TV) is a best guess and unconfirmed.
