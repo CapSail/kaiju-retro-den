@@ -1,0 +1,20 @@
+[Variables]
+Cream=224,210,178
+CreamDk=198,182,148
+Ink=52,34,20
+Glass=30,25,22
+Amber=255,176,66
+AmberDim=170,126,52
+Brass=184,148,78
+Orange=206,98,30
+Avocado=112,128,52
+Mustard=214,166,48
+Groove=56,44,34
+Bakelite=30,27,25
+Chrome=196,194,186
+Wood=112,74,46
+WoodEdge=36,22,12
+Panel=224,210,178
+Dim=100,80,56
+Txt=52,34,20
+Font=Courier New

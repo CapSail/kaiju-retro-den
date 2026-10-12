@@ -1,0 +1,11 @@
+{
+  "plaque_text": "KAIJU",
+  "music_player": "itunes",
+  "movies_dir": "C:\\Users\\YOU\\Videos\\Movies",
+  "snes_rom_dir": "C:\\Games\\ROMs\\SNES",
+  "gamecube_wii_rom_dir": "C:\\Games\\ROMs\\GameCube",
+  "cabinet_dir": "C:\\Users\\YOU\\Documents\\Kaiju Cabinet",
+  "wallpaper_engine_dir": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\wallpaper_engine",
+  "steam_exe": "C:\\Program Files (x86)\\Steam\\steam.exe",
+  "python_exe": "C:\\Users\\YOU\\AppData\\Local\\Programs\\Python\\Python311\\python.exe"
+}
