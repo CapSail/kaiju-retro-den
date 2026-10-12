@@ -9,3 +9,4 @@ build/
 PLAN.md
 WORKLOG.md
 tools/grep_gate_patterns.local.txt
+TESTER-CHECKLIST.md
