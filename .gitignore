@@ -5,9 +5,4 @@ src/tools/
 src/config.json
 build/
 
-# local-only: private plan, work log and personal check patterns
-PLAN.md
-WORKLOG.md
-tools/grep_gate_patterns.local.txt
-TESTER-CHECKLIST.md
 tools/preview/out/

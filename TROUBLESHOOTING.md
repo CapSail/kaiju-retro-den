@@ -46,7 +46,6 @@ The room only makes sure the emulators keep reading your controller while the ga
 * Spotify support relies on Rainmeter's built-in Spotify reader and has not been confirmed yet. iTunes uses the same mechanism and is the safer choice for now.
 * Snes9x only creates its settings file the first time it runs, so the room's fixes for it (keeps running in the TV, 4:3 picture) apply from the second game onward. Run FIX DESKTOP after your first game if the picture looks stretched wrong.
 * The mpv scripts that find their folder (`tvstate.lua`, `tvhover.lua`) have not yet been run inside mpv after the move to the new folder layout.
-* PlayStation 2 is not supported in this version.
 * The Dolphin picture scaling fix (stretching GameCube games to the 4:3 TV) is a best guess and unconfirmed.
 * A monitor that has been switched to another computer's input is invisible to Windows. Switch it back, then run FIX DESKTOP.
 * Fullscreen apps pause the TV and hide the widgets on purpose; they come back when the app leaves the front.
